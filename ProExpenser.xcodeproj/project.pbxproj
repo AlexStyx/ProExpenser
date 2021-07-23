@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F1916E726AB5A140011E410 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5F1916E626AB5A140011E410 /* .gitignore */; };
 		5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBD26AB13E300387EBF /* AppDelegate.swift */; };
 		5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */; };
 		5F90FCC226AB13E400387EBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCC126AB13E400387EBF /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F1916E626AB5A140011E410 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5F90FCBA26AB13E300387EBF /* ProExpenser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProExpenser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F90FCBD26AB13E300387EBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 		5F90FCB126AB13E300387EBF = {
 			isa = PBXGroup;
 			children = (
+				5F1916E626AB5A140011E410 /* .gitignore */,
 				5F90FCBC26AB13E300387EBF /* ProExpenser */,
 				5F90FCBB26AB13E300387EBF /* Products */,
 			);
@@ -127,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F1916E726AB5A140011E410 /* .gitignore in Resources */,
 				5F90FCCD26AB13E600387EBF /* LaunchScreen.storyboard in Resources */,
 				5F90FCCA26AB13E600387EBF /* Assets.xcassets in Resources */,
 				5F90FCC526AB13E400387EBF /* Main.storyboard in Resources */,
