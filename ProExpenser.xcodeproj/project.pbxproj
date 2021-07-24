@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5F1916E726AB5A140011E410 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5F1916E626AB5A140011E410 /* .gitignore */; };
 		5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1916F026ABE44D0011E410 /* CoreDataService.swift */; };
+		5F1916F426ABED990011E410 /* EntityKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1916F326ABED990011E410 /* EntityKind.swift */; };
 		5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBD26AB13E300387EBF /* AppDelegate.swift */; };
 		5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */; };
 		5F90FCC226AB13E400387EBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCC126AB13E400387EBF /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		5F1916E626AB5A140011E410 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5F1916F026ABE44D0011E410 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		5F1916F326ABED990011E410 /* EntityKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityKind.swift; sourceTree = "<group>"; };
 		5F90FCBA26AB13E300387EBF /* ProExpenser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProExpenser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F90FCBD26AB13E300387EBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			children = (
 				5F90FCBD26AB13E300387EBF /* AppDelegate.swift */,
 				5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */,
+				5F1916F326ABED990011E410 /* EntityKind.swift */,
 				5F90FCC926AB13E600387EBF /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
@@ -208,6 +211,7 @@
 				5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */,
 				5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */,
 				5F90FCC826AB13E400387EBF /* ProExpenser.xcdatamodeld in Sources */,
+				5F1916F426ABED990011E410 /* EntityKind.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
