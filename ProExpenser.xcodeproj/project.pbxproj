@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F1916E726AB5A140011E410 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5F1916E626AB5A140011E410 /* .gitignore */; };
+		5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1916F026ABE44D0011E410 /* CoreDataService.swift */; };
 		5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBD26AB13E300387EBF /* AppDelegate.swift */; };
 		5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */; };
 		5F90FCC226AB13E400387EBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCC126AB13E400387EBF /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		5F1916E626AB5A140011E410 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5F1916F026ABE44D0011E410 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		5F90FCBA26AB13E300387EBF /* ProExpenser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProExpenser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F90FCBD26AB13E300387EBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +56,6 @@
 		5F1916E926ABE27E0011E410 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5F90FCC626AB13E400387EBF /* ProExpenser.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -93,6 +94,15 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
+		5F1916EF26ABE43F0011E410 /* Services  */ = {
+			isa = PBXGroup;
+			children = (
+				5F90FCC626AB13E400387EBF /* ProExpenser.xcdatamodeld */,
+				5F1916F026ABE44D0011E410 /* CoreDataService.swift */,
+			);
+			path = "Services ";
+			sourceTree = "<group>";
+		};
 		5F90FCB126AB13E300387EBF = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +123,7 @@
 		5F90FCBC26AB13E300387EBF /* ProExpenser */ = {
 			isa = PBXGroup;
 			children = (
+				5F1916EF26ABE43F0011E410 /* Services  */,
 				5F90FCCE26AB13E600387EBF /* Info.plist */,
 				5F1916EE26ABE3370011E410 /* Statistics */,
 				5F1916EC26ABE2B30011E410 /* Enter Amount */,
@@ -194,6 +205,7 @@
 			files = (
 				5F90FCC226AB13E400387EBF /* ViewController.swift in Sources */,
 				5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */,
+				5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */,
 				5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */,
 				5F90FCC826AB13E400387EBF /* ProExpenser.xcdatamodeld in Sources */,
 			);
