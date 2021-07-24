@@ -16,6 +16,7 @@
 		5F90FCC826AB13E400387EBF /* ProExpenser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCC626AB13E400387EBF /* ProExpenser.xcdatamodeld */; };
 		5F90FCCA26AB13E600387EBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F90FCC926AB13E600387EBF /* Assets.xcassets */; };
 		5F90FCCD26AB13E600387EBF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F90FCCB26AB13E600387EBF /* LaunchScreen.storyboard */; };
+		5FD2864F26AC2E6B002B5E9C /* SpentCategoryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD2864E26AC2E6B002B5E9C /* SpentCategoryContainer.swift */; };
 		5FD80EE526AC0C76008E0833 /* TransactionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD80EE426AC0C76008E0833 /* TransactionsContainer.swift */; };
 		5FF7751D26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF7751C26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift */; };
 		5FF7751F26AC1773007E4880 /* CollectionViewCellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF7751E26AC1773007E4880 /* CollectionViewCellIdentifier.swift */; };
@@ -33,6 +34,7 @@
 		5F90FCC926AB13E600387EBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F90FCCC26AB13E600387EBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F90FCCE26AB13E600387EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FD2864E26AC2E6B002B5E9C /* SpentCategoryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpentCategoryContainer.swift; sourceTree = "<group>"; };
 		5FD80EE426AC0C76008E0833 /* TransactionsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsContainer.swift; sourceTree = "<group>"; };
 		5FF7751C26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		5FF7751E26AC1773007E4880 /* CollectionViewCellIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCellIdentifier.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				5FD80EE426AC0C76008E0833 /* TransactionsContainer.swift */,
+				5FD2864E26AC2E6B002B5E9C /* SpentCategoryContainer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				5FD80EE526AC0C76008E0833 /* TransactionsContainer.swift in Sources */,
 				5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */,
 				5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */,
+				5FD2864F26AC2E6B002B5E9C /* SpentCategoryContainer.swift in Sources */,
 				5F90FCC826AB13E400387EBF /* ProExpenser.xcdatamodeld in Sources */,
 				5FF7751F26AC1773007E4880 /* CollectionViewCellIdentifier.swift in Sources */,
 				5F1916F426ABED990011E410 /* EntityKind.swift in Sources */,

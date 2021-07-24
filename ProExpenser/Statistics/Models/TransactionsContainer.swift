@@ -29,7 +29,8 @@ class TransactionsContainer {
         yearTransactions = transactions.filter { $0.date != nil ? yearRange.contains($0.date!) : false }
     }
     
-    init(transactions: [Transaction]) {
+    init?(transactions: [Transaction]?) {
+        guard  let transactions = transactions else { return nil }
         updateRanges()
         updateTransactionLists(transactions: transactions)
     }
