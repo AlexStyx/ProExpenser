@@ -41,6 +41,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F1916E826ABE2630011E410 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				5F90FCBD26AB13E300387EBF /* AppDelegate.swift */,
+				5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */,
+				5F90FCC926AB13E600387EBF /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		5F1916E926ABE27E0011E410 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5F90FCC626AB13E400387EBF /* ProExpenser.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5F1916EA26ABE28D0011E410 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5F90FCC126AB13E400387EBF /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5F1916EB26ABE2990011E410 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5F90FCCB26AB13E600387EBF /* LaunchScreen.storyboard */,
+				5F90FCC326AB13E400387EBF /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F1916EC26ABE2B30011E410 /* Enter Amount */ = {
+			isa = PBXGroup;
+			children = (
+				5F1916EB26ABE2990011E410 /* Views */,
+				5F1916EA26ABE28D0011E410 /* Controllers */,
+				5F1916E926ABE27E0011E410 /* Models */,
+			);
+			path = "Enter Amount";
+			sourceTree = "<group>";
+		};
+		5F1916EE26ABE3370011E410 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		5F90FCB126AB13E300387EBF = {
 			isa = PBXGroup;
 			children = (
@@ -61,14 +113,10 @@
 		5F90FCBC26AB13E300387EBF /* ProExpenser */ = {
 			isa = PBXGroup;
 			children = (
-				5F90FCBD26AB13E300387EBF /* AppDelegate.swift */,
-				5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */,
-				5F90FCC126AB13E400387EBF /* ViewController.swift */,
-				5F90FCC326AB13E400387EBF /* Main.storyboard */,
-				5F90FCC926AB13E600387EBF /* Assets.xcassets */,
-				5F90FCCB26AB13E600387EBF /* LaunchScreen.storyboard */,
 				5F90FCCE26AB13E600387EBF /* Info.plist */,
-				5F90FCC626AB13E400387EBF /* ProExpenser.xcdatamodeld */,
+				5F1916EE26ABE3370011E410 /* Statistics */,
+				5F1916EC26ABE2B30011E410 /* Enter Amount */,
+				5F1916E826ABE2630011E410 /* SupportingFiles */,
 			);
 			path = ProExpenser;
 			sourceTree = "<group>";
