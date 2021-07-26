@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TransactionsContainer {
+final class TransactionsContainer {
     
     private var dayRange: ClosedRange<Date> = (Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date())...Date()
     private var monthRange: ClosedRange<Date> = (Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date())...Date()

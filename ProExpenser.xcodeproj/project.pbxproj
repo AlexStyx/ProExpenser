@@ -16,6 +16,10 @@
 		5F90FCC826AB13E400387EBF /* ProExpenser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCC626AB13E400387EBF /* ProExpenser.xcdatamodeld */; };
 		5F90FCCA26AB13E600387EBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F90FCC926AB13E600387EBF /* Assets.xcassets */; };
 		5F90FCCD26AB13E600387EBF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F90FCCB26AB13E600387EBF /* LaunchScreen.storyboard */; };
+		5F9CBC1F26AD2B740092A1F7 /* EnterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CBC1E26AD2B740092A1F7 /* EnterConfigurator.swift */; };
+		5F9CBC2126AD2B870092A1F7 /* EnterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CBC2026AD2B870092A1F7 /* EnterPresenter.swift */; };
+		5F9CBC2326AD2BA10092A1F7 /* EnterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CBC2226AD2BA10092A1F7 /* EnterInteractor.swift */; };
+		5F9CBC2526AD2BE00092A1F7 /* EnterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9CBC2426AD2BE00092A1F7 /* EnterRouter.swift */; };
 		5FD2864F26AC2E6B002B5E9C /* SpentCategoryContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD2864E26AC2E6B002B5E9C /* SpentCategoryContainer.swift */; };
 		5FD80EE526AC0C76008E0833 /* TransactionsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD80EE426AC0C76008E0833 /* TransactionsContainer.swift */; };
 		5FF7751D26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF7751C26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift */; };
@@ -34,6 +38,10 @@
 		5F90FCC926AB13E600387EBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F90FCCC26AB13E600387EBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F90FCCE26AB13E600387EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F9CBC1E26AD2B740092A1F7 /* EnterConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterConfigurator.swift; sourceTree = "<group>"; };
+		5F9CBC2026AD2B870092A1F7 /* EnterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPresenter.swift; sourceTree = "<group>"; };
+		5F9CBC2226AD2BA10092A1F7 /* EnterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterInteractor.swift; sourceTree = "<group>"; };
+		5F9CBC2426AD2BE00092A1F7 /* EnterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRouter.swift; sourceTree = "<group>"; };
 		5FD2864E26AC2E6B002B5E9C /* SpentCategoryContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpentCategoryContainer.swift; sourceTree = "<group>"; };
 		5FD80EE426AC0C76008E0833 /* TransactionsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsContainer.swift; sourceTree = "<group>"; };
 		5FF7751C26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -64,35 +72,23 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		5F1916E926ABE27E0011E410 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		5F1916EA26ABE28D0011E410 /* Controllers */ = {
+		5F1916EB26ABE2990011E410 /* EnterViews */ = {
 			isa = PBXGroup;
 			children = (
 				5F90FCC126AB13E400387EBF /* EnterAmountViewController.swift */,
+				5FD2865026AC36B4002B5E9C /* Cells */,
 			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		5F1916EB26ABE2990011E410 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5FF7751C26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift */,
-			);
-			path = Views;
+			path = EnterViews;
 			sourceTree = "<group>";
 		};
 		5F1916EC26ABE2B30011E410 /* Enter Amount */ = {
 			isa = PBXGroup;
 			children = (
-				5F1916EB26ABE2990011E410 /* Views */,
-				5F1916EA26ABE28D0011E410 /* Controllers */,
-				5F1916E926ABE27E0011E410 /* Models */,
+				5F9CBC1E26AD2B740092A1F7 /* EnterConfigurator.swift */,
+				5F9CBC2026AD2B870092A1F7 /* EnterPresenter.swift */,
+				5F9CBC2226AD2BA10092A1F7 /* EnterInteractor.swift */,
+				5F9CBC2426AD2BE00092A1F7 /* EnterRouter.swift */,
+				5F1916EB26ABE2990011E410 /* EnterViews */,
 			);
 			path = "Enter Amount";
 			sourceTree = "<group>";
@@ -141,6 +137,14 @@
 				5F1916E826ABE2630011E410 /* SupportingFiles */,
 			);
 			path = ProExpenser;
+			sourceTree = "<group>";
+		};
+		5FD2865026AC36B4002B5E9C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5FF7751C26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		5FD80EE326AC0C5E008E0833 /* Models */ = {
@@ -223,13 +227,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FF7751D26AC16FC007E4880 /* SpendCategoryCollectionViewCell.swift in Sources */,
+				5F9CBC2526AD2BE00092A1F7 /* EnterRouter.swift in Sources */,
+				5F9CBC2326AD2BA10092A1F7 /* EnterInteractor.swift in Sources */,
 				5F90FCC226AB13E400387EBF /* EnterAmountViewController.swift in Sources */,
 				5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */,
 				5FD80EE526AC0C76008E0833 /* TransactionsContainer.swift in Sources */,
 				5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */,
 				5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */,
+				5F9CBC1F26AD2B740092A1F7 /* EnterConfigurator.swift in Sources */,
 				5FD2864F26AC2E6B002B5E9C /* SpentCategoryContainer.swift in Sources */,
 				5F90FCC826AB13E400387EBF /* ProExpenser.xcdatamodeld in Sources */,
+				5F9CBC2126AD2B870092A1F7 /* EnterPresenter.swift in Sources */,
 				5FF7751F26AC1773007E4880 /* CollectionViewCellIdentifier.swift in Sources */,
 				5F1916F426ABED990011E410 /* EntityKind.swift in Sources */,
 			);

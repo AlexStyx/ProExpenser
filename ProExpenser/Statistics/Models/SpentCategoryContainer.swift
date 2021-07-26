@@ -7,14 +7,16 @@
 
 import Foundation
 
-class SpendCategoryContainer {
+typealias Period = Calendar.Component
+
+final class SpendCategoryContainer {
     private let spendCategory: SpendCategory
     private let transactionsContainer: TransactionsContainer?
     private var totalForDay: Double = 0
     private var totalForMonth: Double = 0
     private var totalForYear: Double = 0
     
-    var period: Calendar.Component {
+    var period: Period {
         didSet {
             switch period {
             case .day: total = totalForDay
@@ -25,9 +27,9 @@ class SpendCategoryContainer {
         }
     }
     
-    var total: Double = 0.0
+    private(set) var total: Double = 0.0
     
-    init(spendCategory: SpendCategory, period: Calendar.Component) {
+    init(spendCategory: SpendCategory, period: Period) {
         self.spendCategory = spendCategory
         let transactions = spendCategory.transactions?.mutableCopy() as? [Transaction]
         self.transactionsContainer = TransactionsContainer(transactions: transactions)
