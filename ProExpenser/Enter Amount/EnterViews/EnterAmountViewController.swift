@@ -7,17 +7,28 @@
 
 import UIKit
 
+protocol EnterViewProtocol: AnyObject {
+    func addSubviews()
+    func setupLayout()
+    func setupNavigationController()
+    func updateEnterAmountLabelValue(newValue: String)
+    func updateLists()
+}
+
 class EnterAmountViewController: UIViewController {
+    var presenter: EnterPresenterProtocol!
+    var configurator: EnterConfiguratorProtocol = EnterConfigurator()
+    
+    
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupNavigationController()
-        addSabviews()
-        setupLayout()
+        configurator.configure(with: self)
+        presenter.configureView()
     }
     
-    let data = ["data", "name", "another_data", "name", "another_data", "name", "another_data"]
-    
+    //MARK: - Create Views
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,24 +41,9 @@ class EnterAmountViewController: UIViewController {
         return contentView
     }()
     
-    private func setupNavigationController() {
-        navigationItem.title = "Expenses"
-        let rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chart.pie"),
-            style: .done,
-            target: self,
-            action: #selector(openChartTapped)
-        )
-        navigationItem.rightBarButtonItem = rightBarButtonItem
-    }
-    
-    @objc private func openChartTapped() {
-        print(#function)
-    }
-    
     private let amountLabel: UILabel = {
         let label = UILabel()
-        let font = UIFont(name: "Helvetica", size: 40)
+        let font = UIFont.preferredFont(forTextStyle: .title1)
         label.text = "Enter amount"
         label.textColor = .gray
         label.font = font
@@ -73,11 +69,12 @@ class EnterAmountViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.isScrollEnabled = false
+        tableView.separatorColor = .white
         return tableView
     }()
     
     private lazy var collectinView: UICollectionView = {
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 100), collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: collectionViewHeight), collectionViewLayout: UICollectionViewFlowLayout())
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: collectionView.bounds.size.height - 10, height: collectionView.bounds.size.height - 10)
@@ -90,150 +87,39 @@ class EnterAmountViewController: UIViewController {
         collectionView.backgroundColor = .white
         return collectionView
     }()
-    
-    let finishView: UIView = {
-        let finishView = UIView()
-        finishView.translatesAutoresizingMaskIntoConstraints = false
-        return finishView
-    }()
-    
 }
 
-private extension EnterAmountViewController {
+//MARK: - EnterViewProtocol
+extension EnterAmountViewController: EnterViewProtocol {
     
-    private func onPressButton(_ sender: UIButton) {
-        sender.backgroundColor = .gray.withAlphaComponent(0.8)
-        
-        UIView.animate(withDuration: 0.05, delay: 0) {
-            sender.backgroundColor = .gray.withAlphaComponent(0.1)
-        }
+    
+    // MARK: - Setup and layout UI
+    func setupNavigationController() {
+    navigationItem.title = "Expenses"
+    navigationController?.navigationBar.barTintColor = .white
+    navigationController?.navigationBar.tintColor = .black
+    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+    navigationController?.setNavigationBarBorderColor(.black)
+    let rightBarButtonItem = UIBarButtonItem(
+        image: UIImage(systemName: "chart.pie"),
+        style: .done,
+        target: self,
+        action: #selector(openChartTapped)
+    )
+    navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    @objc private func enterNumber(_ sender: UIButton) {
-        onPressButton(sender)
-        if amountLabel.text!.count <= 16 {
-            if sender.currentTitle == "." {
-                if amountLabel.text!.filter({$0 == "."}).count >= 1 && sender.currentTitle == "." {
-                    amountLabel.text! += ""
-                } else if amountLabel.text == "Enter amount" {
-                    amountLabel.text = "Enter amount"
-                } else {
-                    amountLabel.font = amountLabel.text!.count >= 12 ? UIFont(name: "Helvetica", size: 30) : UIFont(name: "Helvetica", size: 40)
-                    amountLabel.text! += "\(sender.currentTitle!)"
-                }
-            } else {
-                if amountLabel.text == "Enter amount" {
-                    amountLabel.text = ""
-                }
-                amountLabel.font = amountLabel.text!.count >= 12 ? UIFont(name: "Helvetica", size: 30) : UIFont(name: "Helvetica", size: 40)
-                amountLabel.text! += "\(sender.currentTitle!)"
-            }
-        }
-        
-        if let index = amountLabel.text!.firstIndex(of: ".") {
-            if amountLabel.text![index..<amountLabel.text!.endIndex].count == 3 {
-                amountLabel.text! = String(format: "%.2f", (Double(amountLabel.text!) ?? 0))
-            } else if amountLabel.text![index..<amountLabel.text!.endIndex].count >= 3 {
-                amountLabel.text!.remove(at: amountLabel.text!.index(before: amountLabel.text!.endIndex))
-            }
-        }
-        
-        if amountLabel.text!.first == "0" {
-            let start = amountLabel.text!.index(amountLabel.text!.startIndex, offsetBy: 1)
-            if amountLabel.text!.count >= 2 && amountLabel.text![start] != "." {
-                amountLabel.text!.removeLast()
-            }
-        }
-    }
-    
-    @objc private func deleteDigit(_ sender: UIButton) {
-        onPressButton(sender)
-        amountLabel.font = amountLabel.text!.count >= 13 ? UIFont(name: "Helvetica", size: 30) : UIFont(name: "Helvetica", size: 40)
-        if amountLabel.text!.count == 1 {
-            amountLabel.text! = "Enter amount"
-        } else if amountLabel.text! == "Enter amount" {
-            amountLabel.text! = amountLabel.text!
-        } else {
-            amountLabel.text!.removeLast()
-        }
-        
-    }
-    
-    private func addSabviews() {
+    func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(amountLabel)
         contentView.addSubview(numpadStackView)
-        var digit = 0
-        for _ in 1...3 {
-            let stackView = createHorizontalStackView()
-            for _ in 1...3 {
-                digit += 1
-                let digitButton = createButton(title: "\(digit)", image: nil, action: #selector(enterNumber))
-                stackView.addArrangedSubview(digitButton)
-            }
-            numpadStackView.addArrangedSubview(stackView)
-        }
-        let stackView = createHorizontalStackView()
-
-        let pointButton = createButton(title: ".", image: nil, action: #selector(enterNumber))
-        let zeroButton = createButton(title: "0", image: nil, action: #selector(enterNumber))
-        let image = UIImage(systemName: "delete.left")
-        let backSpaceButton = createButton(title: nil, image: image, action: #selector(deleteDigit))
-
-        stackView.addArrangedSubview(pointButton)
-        stackView.addArrangedSubview(zeroButton)
-        stackView.addArrangedSubview(backSpaceButton)
-
-        numpadStackView.addArrangedSubview(stackView)
-
+        createNumpadView()
         contentView.addSubview(collectinView)
         contentView.addSubview(tableView)
-//        contentView.addSubview(finishView)
-
     }
     
-    private func createHorizontalStackView() -> UIStackView {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        stackView.spacing = 10
-        stackView.axis = .horizontal
-        return stackView
-    }
-    
-    private func createButton(title: String?, image: UIImage?, action: Selector) -> UIButton {
-        let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: UIScreen.main.bounds.size.height/10, height: UIScreen.main.bounds.size.height/10)))
-        button.layer.masksToBounds = true
-        button.layer.borderWidth = 3
-        button.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        button.backgroundColor = .gray.withAlphaComponent(0.1)
-        
-        button.layer.cornerRadius = button.bounds.size.width.rounded() * 0.5
-        button.clipsToBounds = true
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2).isActive = true
-        button.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2).isActive = true
-        if title != nil {
-            button.setTitle(title, for: .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 40)
-            button.setTitleColor(.gray, for: .normal)
-            button.contentHorizontalAlignment = .center
-        }
-        
-        if image != nil {
-            button.setImage(image, for: .normal)
-            button.tintColor = .gray
-        }
-        
-        button.addTarget(self, action: action, for: .touchUpInside)
-        
-        return button
-    }
-    
-    private func setupLayout() {
+    func setupLayout() {
         scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -245,60 +131,195 @@ private extension EnterAmountViewController {
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         
         amountLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        amountLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 50).isActive = true
+        amountLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         
         numpadStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        numpadStackView.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 30).isActive = true
-
+        numpadStackView.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 10).isActive = true
+        for stack in (numpadStackView.arrangedSubviews as! [UIStackView]) {
+            for button in stack.arrangedSubviews {
+                button.widthAnchor.constraint(equalToConstant: buttonSideSize).isActive = true
+                button.heightAnchor.constraint(equalToConstant: buttonSideSize).isActive = true
+            }
+        }
+        
         collectinView.topAnchor.constraint(equalTo: numpadStackView.bottomAnchor, constant: 10).isActive = true
         collectinView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor).isActive = true
-        collectinView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-
-        let tableViewHeight: CGFloat = CGFloat(44 * data.count + 25)
+        collectinView.heightAnchor.constraint(equalToConstant: collectionViewHeight).isActive = true
+        
         tableView.topAnchor.constraint(equalTo: collectinView.bottomAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         tableView.heightAnchor.constraint(equalToConstant: tableViewHeight).isActive = true
         tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
+    
+    //MARK: - Update UI
+    func updateLists() {
+        tableView.reloadData()
+        collectinView.reloadData()
+    }
+
+    func updateEnterAmountLabelValue(newValue: String) {
+        amountLabel.text = newValue
+    }
 }
 
+//MARK: - Actions
+extension EnterAmountViewController {
+    @objc private func openChartTapped() {
+        presenter.goToChartButtonClicked()
+    }
+    
+    @objc func numpadButtonTapped(_ sender: UIButton) {
+        animateButton(sender)
+        presenter.handleInputValue(handledValue: sender.currentTitle)
+    }
+}
+
+//MARK: - Createing views
+extension EnterAmountViewController {
+    
+    private func createNumpadView() {
+        let allTitles: [[Any]] = [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], [".", "0", (UIImage(systemName: "delete.left") as Any)]]
+        for titles in allTitles {
+            let numpadRow = createNumpadRow(titles: titles)
+            numpadStackView.addArrangedSubview(numpadRow)
+        }
+    }
+    
+    private func createNumpadRow(titles: [Any]) -> UIStackView {
+        if titles.count != 3 {
+            fatalError("Number if title does not equal 3: createNumpadRow(titles: [Any])")
+        }
+        let numpadRow = createHorizontalStackView(arrangedSubviews: [])
+        for title in titles {
+            var button = UIButton()
+            switch title {
+            case let buttonTitle as (String): button = createButton(title: buttonTitle, image: nil, action: #selector(numpadButtonTapped))
+            case let buttonTitle as (UIImage): button = createButton(title: nil, image: buttonTitle, action: #selector(numpadButtonTapped))
+            default: fatalError("Wrong type of title in createNumpadRow(titles: [Any])")
+            }
+            numpadRow.addArrangedSubview(button)
+        }
+        return numpadRow
+    }
+
+    private func createButton(title: String?, image: UIImage?, action: Selector) -> UIButton {
+        let buttonFrame = CGRect(origin: CGPoint.zero, size: buttonSize)
+        let button = UIButton(frame: buttonFrame)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.clipsToBounds = true
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.layer.cornerRadius = button.bounds.size.width.rounded() * 0.5
+        button.backgroundColor = .gray.withAlphaComponent(0.1)
+        
+        if title != nil {
+            button.setTitle(title, for: .normal)
+            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+            button.setTitleColor(.gray, for: .normal)
+            button.contentHorizontalAlignment = .center
+        }
+        
+        if image != nil {
+            button.setImage(image, for: .normal)
+            button.tintColor = .gray
+        }
+        
+        button.addTarget(self, action: action, for: .touchUpInside)
+        return button
+    }
+    
+    private func createHorizontalStackView(arrangedSubviews: [UIView]) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.axis = .horizontal
+        return stackView
+    }
+}
+
+//MARK: - UITableViewDataSource, UITableViewDelegate
 extension EnterAmountViewController: UITableViewDataSource, UITableViewDelegate {
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        numberOfRows
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return "Spent today:"
+        "Spent today:"
     }
-        
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        cell.textLabel?.text = data[indexPath.row]
-        print(cell.frame.size.height)
+        let transaction = presenter.transaction(at: indexPath)
+        var content = cell.defaultContentConfiguration()
+        content.text = transaction.category?.name
+        content.image = UIImage(named: transaction.category?.imageName ?? "")
+        content.secondaryText = String(format: "%.2f", transaction.transitedValue)
+        cell.contentConfiguration = content
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        tableViewHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = .white
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = .black
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableViewCellHeight
     }
 }
 
+//MARK: -  UICollectionViewDataSource, UICollectionViewDelegate
 extension EnterAmountViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        presenter.numberOfCells()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.categoryCell.rawValue, for: indexPath) as! SpendCategoryCollectionViewCell
-        cell.backgroundColor = .red
+        let category = presenter.category(at: indexPath)
+        cell.spendCategory = category
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        animateAmountLabel()
+        presenter.collectionViewCellClicked(at: indexPath)
+    }
+}
+
+//MARK: - UICollectionViewDelegateFlowLayout
+extension EnterAmountViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    }
+}
+
+//MARK: - Size constants
+extension EnterAmountViewController {
+    private var tableViewCellHeight: CGFloat { (view.frame.size.height / 15).rounded() }
+    private var buttonSideSize: CGFloat { (UIScreen.main.bounds.size.width * 0.2).rounded() }
+    private var tableViewHeight: CGFloat { tableViewCellHeight * CGFloat(numberOfRows) + 25 }
+    private var buttonSize: CGSize { CGSize(width: buttonSideSize, height: buttonSideSize) }
+    private var tableViewHeaderHeight: CGFloat { 25 }
+    private var collectionViewHeight: CGFloat { UIScreen.main.bounds.size.height / 9 }
+    private var numberOfRows: Int { presenter.numberOfRows() }
+}
+
+//MARK: - Animations
+extension EnterAmountViewController {
+    private func animateAmountLabel() {
         if amountLabel.text != "Enter amount" {
             UIView.animate(
                 withDuration: 0.5) { [weak self] in
@@ -308,15 +329,31 @@ extension EnterAmountViewController: UICollectionViewDataSource, UICollectionVie
                 self?.amountLabel.text = "Enter amount"
                 self?.amountLabel.alpha = 1
                 self?.amountLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
-                self?.amountLabel.font = UIFont(name: "Helvetica", size: 40)
             }
-            
+        }
+    }
+    
+    private func animateButton(_ sender: UIButton) {
+        sender.backgroundColor = .gray.withAlphaComponent(0.8)
+        UIView.animate(withDuration: 0.05, delay: 0) {
+            sender.backgroundColor = .gray.withAlphaComponent(0.1)
         }
     }
 }
 
-extension EnterAmountViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+extension UINavigationController {
+    func setNavigationBarBorderColor(_ color:UIColor) {
+        self.navigationBar.shadowImage = color.as1ptImage()
+    }
+}
+
+extension UIColor {
+    func as1ptImage() -> UIImage {
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+        setFill()
+        UIGraphicsGetCurrentContext()?.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+        let image = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

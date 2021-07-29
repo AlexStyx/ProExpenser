@@ -8,9 +8,17 @@
 import Foundation
 
 protocol EnterRouterProtocol {
-
+    func goToChart()
 }
 
 class EnterRouter: EnterRouterProtocol {
+    weak var viewController: EnterAmountViewController!
     
+    init(viewController: EnterAmountViewController) {
+        self.viewController = viewController
+    }
+    
+    func goToChart() {
+        print("goToChart")
+    }
 }

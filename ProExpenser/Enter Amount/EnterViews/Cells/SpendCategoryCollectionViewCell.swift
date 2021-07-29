@@ -8,8 +8,15 @@
 import UIKit
 
 class SpendCategoryCollectionViewCell: UICollectionViewCell {
-    let name: String? = nil
-    let image: UIImage? = nil
+    private var name: String? = nil { didSet { label.text = name } }
+    private var image: UIImage? = nil { didSet { imageView.image = image } }
+    
+    var spendCategory: SpendCategory? {
+        didSet {
+            name = spendCategory?.name
+            image = UIImage(named: spendCategory?.imageName ?? "")
+        }
+    }
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,10 +24,11 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        configureView()
     }
     
-    let stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .center
@@ -31,7 +39,7 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    let imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let image = UIImage(named: "nosign")
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
@@ -39,7 +47,7 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         let font = UIFont(name: "Helvetica", size: 15)
         label.text = "Test"
@@ -56,6 +64,7 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(label)
         setupLayout()
+        backgroundColor = .white
     }
     
     private func setupLayout() {

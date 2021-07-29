@@ -7,9 +7,9 @@
 
 import Foundation
 
-typealias Period = Calendar.Component
 
 final class SpendCategoryContainer {
+    
     private let spendCategory: SpendCategory
     private let transactionsContainer: TransactionsContainer?
     private var totalForDay: Double = 0
@@ -22,10 +22,20 @@ final class SpendCategoryContainer {
             case .day: total = totalForDay
             case .month: total = totalForMonth
             case .year: total = totalForYear
-            default: break
             }
         }
     }
+    
+    var transactions: [Transaction]? {
+        switch period {
+        case .day: return transactionsContainer?.todayTransactions
+        case .month: return transactionsContainer?.monthTransactions
+        case .year: return transactionsContainer?.yearTransactions
+        }
+    }
+    
+    var imageName: String { spendCategory.imageName ?? "" }
+    var name: String { spendCategory.name ?? "" }
     
     private(set) var total: Double = 0.0
     
@@ -51,5 +61,10 @@ final class SpendCategoryContainer {
         totalForYear = transactionsContainer.yearTransactions.reduce(0.0, { total, transiction in
             total + transiction.transitedValue
         })
+    }
+    enum Period {
+        case day
+        case month
+        case year
     }
 }

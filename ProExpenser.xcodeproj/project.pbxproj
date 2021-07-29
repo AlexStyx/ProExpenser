@@ -10,6 +10,7 @@
 		5F1916E726AB5A140011E410 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5F1916E626AB5A140011E410 /* .gitignore */; };
 		5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1916F026ABE44D0011E410 /* CoreDataService.swift */; };
 		5F1916F426ABED990011E410 /* EntityKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1916F326ABED990011E410 /* EntityKind.swift */; };
+		5F682C5B26AFD4B300B5FCF4 /* SpendCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F682C5A26AFD4B300B5FCF4 /* SpendCategories.plist */; };
 		5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBD26AB13E300387EBF /* AppDelegate.swift */; };
 		5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */; };
 		5F90FCC226AB13E400387EBF /* EnterAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCC126AB13E400387EBF /* EnterAmountViewController.swift */; };
@@ -30,6 +31,7 @@
 		5F1916E626AB5A140011E410 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5F1916F026ABE44D0011E410 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		5F1916F326ABED990011E410 /* EntityKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityKind.swift; sourceTree = "<group>"; };
+		5F682C5A26AFD4B300B5FCF4 /* SpendCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpendCategories.plist; sourceTree = "<group>"; };
 		5F90FCBA26AB13E300387EBF /* ProExpenser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProExpenser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F90FCBD26AB13E300387EBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		5F1916EC26ABE2B30011E410 /* Enter Amount */ = {
 			isa = PBXGroup;
 			children = (
+				5F682C5A26AFD4B300B5FCF4 /* SpendCategories.plist */,
 				5F9CBC1E26AD2B740092A1F7 /* EnterConfigurator.swift */,
 				5F9CBC2026AD2B870092A1F7 /* EnterPresenter.swift */,
 				5F9CBC2226AD2BA10092A1F7 /* EnterInteractor.swift */,
@@ -130,8 +133,8 @@
 		5F90FCBC26AB13E300387EBF /* ProExpenser */ = {
 			isa = PBXGroup;
 			children = (
-				5F1916EF26ABE43F0011E410 /* Services  */,
 				5F90FCCE26AB13E600387EBF /* Info.plist */,
+				5F1916EF26ABE43F0011E410 /* Services  */,
 				5F1916EE26ABE3370011E410 /* Statistics */,
 				5F1916EC26ABE2B30011E410 /* Enter Amount */,
 				5F1916E826ABE2630011E410 /* SupportingFiles */,
@@ -215,6 +218,7 @@
 			files = (
 				5F1916E726AB5A140011E410 /* .gitignore in Resources */,
 				5F90FCCD26AB13E600387EBF /* LaunchScreen.storyboard in Resources */,
+				5F682C5B26AFD4B300B5FCF4 /* SpendCategories.plist in Resources */,
 				5F90FCCA26AB13E600387EBF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

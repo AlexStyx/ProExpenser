@@ -24,10 +24,10 @@ final class TransactionsContainer {
     }
     
     private func updateTransactionLists(transactions: [Transaction]) {
-        todayTransactions = transactions.filter { $0.date != nil ? dayRange.contains($0.date!) : false }
-        monthTransactions = transactions.filter { $0.date != nil ? monthRange.contains($0.date!) : false }
-        yearTransactions = transactions.filter { $0.date != nil ? yearRange.contains($0.date!) : false }
-    }
+    todayTransactions = transactions.filter { $0.date != nil ? dayRange.contains($0.date!) : false }
+    monthTransactions = transactions.filter { $0.date != nil ? monthRange.contains($0.date!) : false }
+    yearTransactions = transactions.filter { $0.date != nil ? yearRange.contains($0.date!) : false }
+}
     
     init?(transactions: [Transaction]?) {
         guard  let transactions = transactions else { return nil }
