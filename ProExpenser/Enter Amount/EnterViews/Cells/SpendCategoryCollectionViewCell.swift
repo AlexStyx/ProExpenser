@@ -34,7 +34,7 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.contentMode = .scaleToFill
-        stackView.spacing = 3
+        stackView.spacing = 0
         stackView.axis = .vertical
         return stackView
     }()
@@ -49,7 +49,7 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
     
     private let label: UILabel = {
         let label = UILabel()
-        let font = UIFont(name: "Helvetica", size: 15)
+        let font = UIFont.preferredFont(forTextStyle: .subheadline)
         label.text = "Test"
         label.textColor = .gray
         label.font = font

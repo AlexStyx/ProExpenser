@@ -71,7 +71,9 @@ class EnterPresenter: EnterPresenterProtocol {
         interactor.amount = Double(inputValue) ?? nil
         let index = indexPath.row
         interactor.saveTransaction(to: index)
+        inputValue = defaultAmountValue
     }
+    
     
     //MARK: - Validation
     private func validate(handledValue: String) -> String  {
@@ -116,7 +118,6 @@ class EnterPresenter: EnterPresenterProtocol {
     //MARK: - Configure and update view
     private func updateView() {
         view.updateEnterAmountLabelValue(newValue: inputValue)
-        view.updateLists()
     }
     
     func configureView() {

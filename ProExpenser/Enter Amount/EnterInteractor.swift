@@ -31,7 +31,7 @@ class EnterInteractor: EnterInteractorProtocol {
         for category in categories {
             transactions += coreDataService.getTransactions(for: category)?.filter{ dateRange.contains($0.date!) } ?? []
         }
-        return transactions
+        return transactions.sorted { $0.date! < $1.date! }
     }
     
     func saveTransaction(to index: Int) {

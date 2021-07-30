@@ -12,7 +12,6 @@ protocol EnterViewProtocol: AnyObject {
     func setupLayout()
     func setupNavigationController()
     func updateEnterAmountLabelValue(newValue: String)
-    func updateLists()
 }
 
 class EnterAmountViewController: UIViewController {
@@ -77,7 +76,7 @@ class EnterAmountViewController: UIViewController {
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: collectionViewHeight), collectionViewLayout: UICollectionViewFlowLayout())
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: collectionView.bounds.size.height - 10, height: collectionView.bounds.size.height - 10)
+        layout.itemSize = CGSize(width: collectionView.bounds.size.height - 20, height: collectionView.bounds.size.height - 20)
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -95,18 +94,18 @@ extension EnterAmountViewController: EnterViewProtocol {
     
     // MARK: - Setup and layout UI
     func setupNavigationController() {
-    navigationItem.title = "Expenses"
-    navigationController?.navigationBar.barTintColor = .white
-    navigationController?.navigationBar.tintColor = .black
-    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-    navigationController?.setNavigationBarBorderColor(.black)
-    let rightBarButtonItem = UIBarButtonItem(
-        image: UIImage(systemName: "chart.pie"),
-        style: .done,
-        target: self,
-        action: #selector(openChartTapped)
-    )
-    navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationItem.title = "Expenses"
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationController?.setNavigationBarBorderColor(.black)
+        let rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chart.pie"),
+            style: .done,
+            target: self,
+            action: #selector(openChartTapped)
+        )
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     func addSubviews() {
@@ -149,16 +148,11 @@ extension EnterAmountViewController: EnterViewProtocol {
         tableView.topAnchor.constraint(equalTo: collectinView.bottomAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: tableViewHeight).isActive = true
+        tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: tableViewHeight).isActive = true
         tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
     
     //MARK: - Update UI
-    func updateLists() {
-        tableView.reloadData()
-        collectinView.reloadData()
-    }
-
     func updateEnterAmountLabelValue(newValue: String) {
         amountLabel.text = newValue
     }
@@ -203,7 +197,7 @@ extension EnterAmountViewController {
         }
         return numpadRow
     }
-
+    
     private func createButton(title: String?, image: UIImage?, action: Selector) -> UIButton {
         let buttonFrame = CGRect(origin: CGPoint.zero, size: buttonSize)
         let button = UIButton(frame: buttonFrame)
@@ -296,6 +290,10 @@ extension EnterAmountViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         animateAmountLabel()
         presenter.collectionViewCellClicked(at: indexPath)
+        tableView.reloadData()
+        animateTableView()
+        setupLayout()
+        tableView.setNeedsDisplay()
     }
 }
 
@@ -308,12 +306,13 @@ extension EnterAmountViewController: UICollectionViewDelegateFlowLayout {
 
 //MARK: - Size constants
 extension EnterAmountViewController {
-    private var tableViewCellHeight: CGFloat { (view.frame.size.height / 15).rounded() }
+    private var tableViewCellHeight: CGFloat { (view.frame.size.height / 10).rounded() }
     private var buttonSideSize: CGFloat { (UIScreen.main.bounds.size.width * 0.2).rounded() }
     private var tableViewHeight: CGFloat { tableViewCellHeight * CGFloat(numberOfRows) + 25 }
     private var buttonSize: CGSize { CGSize(width: buttonSideSize, height: buttonSideSize) }
     private var tableViewHeaderHeight: CGFloat { 25 }
-    private var collectionViewHeight: CGFloat { UIScreen.main.bounds.size.height / 9 }
+    private var collectionViewHeight: CGFloat { UIScreen.main.bounds.size.height / 7 + 20 }
+    private var collectionViewInsets: CGFloat { UIScreen.main.bounds.size.width / 6 }
     private var numberOfRows: Int { presenter.numberOfRows() }
 }
 
@@ -330,6 +329,12 @@ extension EnterAmountViewController {
                 self?.amountLabel.alpha = 1
                 self?.amountLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
+        }
+    }
+    
+    private func animateTableView() {
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.tableView.frame.size.height += self!.tableViewCellHeight
         }
     }
     
