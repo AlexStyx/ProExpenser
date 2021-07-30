@@ -83,7 +83,6 @@ class EnterPresenter: EnterPresenterProtocol {
                 if validatedString.filter({ $0 == "." }).count < 1 && handledValue == ".",
                    validatedString != defaultAmountValue,
                    validatedString.count < maxAmountLength {
-                    print(handledValue)
                     validatedString += handledValue
                 }
             } else {

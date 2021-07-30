@@ -19,6 +19,6 @@ class EnterRouter: EnterRouterProtocol {
     }
     
     func goToChart() {
-        print("goToChart")
+        print(#function)
     }
 }

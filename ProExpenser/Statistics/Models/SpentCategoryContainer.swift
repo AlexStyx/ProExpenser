@@ -62,6 +62,7 @@ final class SpendCategoryContainer {
             total + transiction.transitedValue
         })
     }
+    
     enum Period {
         case day
         case month

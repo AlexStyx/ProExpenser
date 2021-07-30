@@ -293,7 +293,6 @@ extension EnterAmountViewController: UICollectionViewDataSource, UICollectionVie
         tableView.reloadData()
         animateTableView()
         setupLayout()
-        tableView.setNeedsDisplay()
     }
 }
 
