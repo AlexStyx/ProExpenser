@@ -53,6 +53,7 @@ class EnterPresenter: EnterPresenterProtocol {
         if let handledValue = handledValue {
             inputValue = validate(handledValue: handledValue)
         } else {
+            guard inputValue != defaultAmountValue else { return }
             if inputValue.count == 1 {
                 inputValue = defaultAmountValue
             } else {
@@ -72,6 +73,8 @@ class EnterPresenter: EnterPresenterProtocol {
         let index = indexPath.row
         interactor.saveTransaction(to: index)
         inputValue = defaultAmountValue
+        view.updateLists()
+        view.setupLayout()
     }
     
     

@@ -12,6 +12,7 @@ protocol EnterViewProtocol: AnyObject {
     func setupLayout()
     func setupNavigationController()
     func updateEnterAmountLabelValue(newValue: String)
+    func updateLists()
 }
 
 class EnterAmountViewController: UIViewController {
@@ -156,6 +157,11 @@ extension EnterAmountViewController: EnterViewProtocol {
     func updateEnterAmountLabelValue(newValue: String) {
         amountLabel.text = newValue
     }
+    
+    func updateLists() {
+        collectinView.reloadData()
+        tableView.reloadData()
+    }
 }
 
 //MARK: - Actions
@@ -252,9 +258,13 @@ extension EnterAmountViewController: UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         let transaction = presenter.transaction(at: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.text = transaction.category?.name
+        cell.backgroundColor = .white
+        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.black]
+        let text = NSAttributedString(string: transaction.category!.name!, attributes: attributes)
+        let amount = NSAttributedString(string: String(format: "%.2f", transaction.transitedValue), attributes: attributes)
+        content.attributedText = text
         content.image = UIImage(named: transaction.category?.imageName ?? "")
-        content.secondaryText = String(format: "%.2f", transaction.transitedValue)
+        content.secondaryAttributedText = amount
         cell.contentConfiguration = content
         return cell
     }
@@ -290,9 +300,7 @@ extension EnterAmountViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         animateAmountLabel()
         presenter.collectionViewCellClicked(at: indexPath)
-        tableView.reloadData()
         animateTableView()
-        setupLayout()
     }
 }
 

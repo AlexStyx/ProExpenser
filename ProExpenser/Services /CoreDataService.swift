@@ -61,7 +61,6 @@ final class CoreDataService: CoreDataServiceProtocol {
                 let path = Bundle.main.path(forResource: "SpendCategories", ofType: "plist"),
                 let dataArray = NSArray(contentsOfFile: path)
             else {
-                print("")
                 return
             }
             for dictionary in dataArray {
@@ -89,7 +88,6 @@ final class CoreDataService: CoreDataServiceProtocol {
     private func saveContext() {
         do {
             try context?.save()
-            print(context)
         } catch let error as NSError {
             print(error.localizedDescription)
         }
