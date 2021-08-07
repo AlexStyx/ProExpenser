@@ -5,7 +5,8 @@
 //  Created by Александр Бисеров on 7/25/21.
 //
 
-import Foundation
+import SwiftUI
+import UIKit
 
 protocol EnterRouterProtocol {
     func goToChart()
@@ -19,6 +20,8 @@ class EnterRouter: EnterRouterProtocol {
     }
     
     func goToChart() {
-        print(#function)
+        let pieChart = PieChartView()
+        let rootViewController = UIHostingController(rootView: pieChart)
+        viewController.present(rootViewController, animated: true)
     }
 }

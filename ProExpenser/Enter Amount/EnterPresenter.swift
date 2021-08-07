@@ -68,7 +68,12 @@ class EnterPresenter: EnterPresenterProtocol {
     }
     
     func collectionViewCellClicked(at indexPath: IndexPath) {
-        guard inputValue != defaultAmountValue else { return }
+        guard inputValue != defaultAmountValue,
+              inputValue != "0"
+        else {
+            inputValue = defaultAmountValue
+            return
+        }
         interactor.amount = Double(inputValue) ?? nil
         let index = indexPath.row
         interactor.saveTransaction(to: index)
@@ -76,7 +81,6 @@ class EnterPresenter: EnterPresenterProtocol {
         view.updateLists()
         view.setupLayout()
     }
-    
     
     //MARK: - Validation
     private func validate(handledValue: String) -> String  {
@@ -115,7 +119,6 @@ class EnterPresenter: EnterPresenterProtocol {
         
         return validatedString
     }
-    
     
     //MARK: - Configure and update view
     private func updateView() {

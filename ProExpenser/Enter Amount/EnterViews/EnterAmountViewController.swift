@@ -19,7 +19,6 @@ class EnterAmountViewController: UIViewController {
     var presenter: EnterPresenterProtocol!
     var configurator: EnterConfiguratorProtocol = EnterConfigurator()
     
-    
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,7 @@ class EnterAmountViewController: UIViewController {
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        let font = UIFont.preferredFont(forTextStyle: .title1)
+        var font = UIFont(name: "Helvetica", size: 25)
         label.text = "Enter amount"
         label.textColor = .gray
         label.font = font
@@ -66,10 +65,10 @@ class EnterAmountViewController: UIViewController {
         let tableView = UITableView(frame: CGRect.zero, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.register(TransactionCell.self, forCellReuseIdentifier: "reuseIdentifier")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.isScrollEnabled = false
-        tableView.separatorColor = .white
+        tableView.separatorColor = .black
         return tableView
     }()
     
@@ -89,7 +88,7 @@ class EnterAmountViewController: UIViewController {
     }()
 }
 
-//MARK: - EnterViewProtocol
+// MARK: - EnterViewProtocol
 extension EnterAmountViewController: EnterViewProtocol {
     
     
@@ -137,14 +136,14 @@ extension EnterAmountViewController: EnterViewProtocol {
         numpadStackView.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 10).isActive = true
         for stack in (numpadStackView.arrangedSubviews as! [UIStackView]) {
             for button in stack.arrangedSubviews {
-                button.widthAnchor.constraint(equalToConstant: buttonSideSize).isActive = true
-                button.heightAnchor.constraint(equalToConstant: buttonSideSize).isActive = true
+                button.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.2).isActive = true
+                button.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.2).isActive = true
             }
         }
         
         collectinView.topAnchor.constraint(equalTo: numpadStackView.bottomAnchor, constant: 10).isActive = true
         collectinView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor).isActive = true
-        collectinView.heightAnchor.constraint(equalToConstant: collectionViewHeight).isActive = true
+        collectinView.heightAnchor.constraint(greaterThanOrEqualToConstant: collectionViewHeight).isActive = true
         
         tableView.topAnchor.constraint(equalTo: collectinView.bottomAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
@@ -153,7 +152,7 @@ extension EnterAmountViewController: EnterViewProtocol {
         tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
     
-    //MARK: - Update UI
+    // MARK: - Update UI
     func updateEnterAmountLabelValue(newValue: String) {
         amountLabel.text = newValue
     }
@@ -164,7 +163,7 @@ extension EnterAmountViewController: EnterViewProtocol {
     }
 }
 
-//MARK: - Actions
+// MARK: - Actions
 extension EnterAmountViewController {
     @objc private func openChartTapped() {
         presenter.goToChartButtonClicked()
@@ -176,7 +175,7 @@ extension EnterAmountViewController {
     }
 }
 
-//MARK: - Createing views
+// MARK: - Createing views
 extension EnterAmountViewController {
     
     private func createNumpadView() {
@@ -189,7 +188,7 @@ extension EnterAmountViewController {
     
     private func createNumpadRow(titles: [Any]) -> UIStackView {
         if titles.count != 3 {
-            fatalError("Number if title does not equal 3: createNumpadRow(titles: [Any])")
+            fatalError("Number of titles does not equal 3: createNumpadRow(titles: [Any])")
         }
         let numpadRow = createHorizontalStackView(arrangedSubviews: [])
         for title in titles {
@@ -218,7 +217,7 @@ extension EnterAmountViewController {
         
         if title != nil {
             button.setTitle(title, for: .normal)
-            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+            button.titleLabel?.font = UIFont(name: "Helvetica", size: 25)
             button.setTitleColor(.gray, for: .normal)
             button.contentHorizontalAlignment = .center
         }
@@ -243,7 +242,7 @@ extension EnterAmountViewController {
     }
 }
 
-//MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension EnterAmountViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -255,22 +254,18 @@ extension EnterAmountViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let transactionCell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? TransactionCell else { fatalError("Cannot found TableViewCellClass") }
         let transaction = presenter.transaction(at: indexPath)
-        var content = cell.defaultContentConfiguration()
-        cell.backgroundColor = .white
-        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: UIColor.black]
-        let text = NSAttributedString(string: transaction.category!.name!, attributes: attributes)
-        let amount = NSAttributedString(string: String(format: "%.2f", transaction.transitedValue), attributes: attributes)
-        content.attributedText = text
-        content.image = UIImage(named: transaction.category?.imageName ?? "")
-        content.secondaryAttributedText = amount
-        cell.contentConfiguration = content
-        return cell
+        transactionCell.transaction = transaction
+        return transactionCell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         tableViewHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableViewCellHeight
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -278,13 +273,9 @@ extension EnterAmountViewController: UITableViewDataSource, UITableViewDelegate 
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = .black
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        tableViewCellHeight
-    }
 }
 
-//MARK: -  UICollectionViewDataSource, UICollectionViewDelegate
+// MARK: -  UICollectionViewDataSource, UICollectionViewDelegate
 extension EnterAmountViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         presenter.numberOfCells()
@@ -304,16 +295,16 @@ extension EnterAmountViewController: UICollectionViewDataSource, UICollectionVie
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 extension EnterAmountViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     }
 }
 
-//MARK: - Size constants
+// MARK: - Size constants
 extension EnterAmountViewController {
-    private var tableViewCellHeight: CGFloat { (view.frame.size.height / 10).rounded() }
+    private var tableViewCellHeight: CGFloat { (view.frame.size.height / 9).rounded() }
     private var buttonSideSize: CGFloat { (UIScreen.main.bounds.size.width * 0.2).rounded() }
     private var tableViewHeight: CGFloat { tableViewCellHeight * CGFloat(numberOfRows) + 25 }
     private var buttonSize: CGSize { CGSize(width: buttonSideSize, height: buttonSideSize) }
@@ -323,7 +314,7 @@ extension EnterAmountViewController {
     private var numberOfRows: Int { presenter.numberOfRows() }
 }
 
-//MARK: - Animations
+// MARK: - Animations
 extension EnterAmountViewController {
     private func animateAmountLabel() {
         if amountLabel.text != "Enter amount" {
@@ -341,7 +332,8 @@ extension EnterAmountViewController {
     
     private func animateTableView() {
         UIView.animate(withDuration: 0.5) { [weak self] in
-            self?.tableView.frame.size.height += self!.tableViewCellHeight
+            guard let cellHeight = self?.tableViewCellHeight else { return }
+            self?.tableView.frame.size.height += cellHeight
         }
     }
     
@@ -353,6 +345,7 @@ extension EnterAmountViewController {
     }
 }
 
+//MARK: - UINavigationController+extension
 extension UINavigationController {
     func setNavigationBarBorderColor(_ color:UIColor) {
         self.navigationBar.shadowImage = color.as1ptImage()

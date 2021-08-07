@@ -17,6 +17,12 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
             image = UIImage(named: spendCategory?.imageName ?? "")
         }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setNeedsDisplay()
+        setupLayout()
+    }
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,7 +55,7 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
     
     private let label: UILabel = {
         let label = UILabel()
-        let font = UIFont.preferredFont(forTextStyle: .subheadline)
+        let font = UIFont(name: "Helvetica", size: 15)
         label.text = "Test"
         label.textColor = .gray
         label.font = font
@@ -57,7 +63,6 @@ class SpendCategoryCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     private func configureView() {
         addSubview(stackView)
