@@ -21,6 +21,8 @@
 		5F63963F26B7240800878BC1 /* PieceOfPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F63963E26B7240800878BC1 /* PieceOfPie.swift */; };
 		5F682C5B26AFD4B300B5FCF4 /* SpendCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F682C5A26AFD4B300B5FCF4 /* SpendCategories.plist */; };
 		5F90E87A26BEFAB0003FC17F /* TotalAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90E87926BEFAB0003FC17F /* TotalAmountView.swift */; };
+		5F90E87D26BF003F003FC17F /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90E87C26BF003F003FC17F /* CategoryList.swift */; };
+		5F90E87F26BF0051003FC17F /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90E87E26BF0051003FC17F /* CategoryRow.swift */; };
 		5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBD26AB13E300387EBF /* AppDelegate.swift */; };
 		5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */; };
 		5F90FCC226AB13E400387EBF /* EnterAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F90FCC126AB13E400387EBF /* EnterAmountViewController.swift */; };
@@ -51,6 +53,8 @@
 		5F63963E26B7240800878BC1 /* PieceOfPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceOfPie.swift; sourceTree = "<group>"; };
 		5F682C5A26AFD4B300B5FCF4 /* SpendCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SpendCategories.plist; sourceTree = "<group>"; };
 		5F90E87926BEFAB0003FC17F /* TotalAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalAmountView.swift; sourceTree = "<group>"; };
+		5F90E87C26BF003F003FC17F /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
+		5F90E87E26BF0051003FC17F /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRow.swift; sourceTree = "<group>"; };
 		5F90FCBA26AB13E300387EBF /* ProExpenser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProExpenser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F90FCBD26AB13E300387EBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F90FCBF26AB13E300387EBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 				5F10439826BD1B5F004690C0 /* InfoView.swift */,
 				5F10439A26BD220B004690C0 /* CircleView.swift */,
 				5F90E87926BEFAB0003FC17F /* TotalAmountView.swift */,
+				5F90E88026BF0055003FC17F /* CategoryList */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -153,6 +158,15 @@
 				5F1916F026ABE44D0011E410 /* CoreDataService.swift */,
 			);
 			path = "Services ";
+			sourceTree = "<group>";
+		};
+		5F90E88026BF0055003FC17F /* CategoryList */ = {
+			isa = PBXGroup;
+			children = (
+				5F90E87C26BF003F003FC17F /* CategoryList.swift */,
+				5F90E87E26BF0051003FC17F /* CategoryRow.swift */,
+			);
+			path = CategoryList;
 			sourceTree = "<group>";
 		};
 		5F90FCB126AB13E300387EBF = {
@@ -285,6 +299,7 @@
 				5F9CBC2326AD2BA10092A1F7 /* EnterInteractor.swift in Sources */,
 				5F90FCC226AB13E400387EBF /* EnterAmountViewController.swift in Sources */,
 				5F90FCBE26AB13E300387EBF /* AppDelegate.swift in Sources */,
+				5F90E87F26BF0051003FC17F /* CategoryRow.swift in Sources */,
 				5F1916F126ABE44D0011E410 /* CoreDataService.swift in Sources */,
 				5F90FCC026AB13E400387EBF /* SceneDelegate.swift in Sources */,
 				5F10439926BD1B5F004690C0 /* InfoView.swift in Sources */,
@@ -296,6 +311,7 @@
 				5FBF75CF26BCEB680083F5FD /* Int+extensions.swift in Sources */,
 				5FF7751F26AC1773007E4880 /* CollectionViewCellIdentifier.swift in Sources */,
 				5F1916F426ABED990011E410 /* EntityKind.swift in Sources */,
+				5F90E87D26BF003F003FC17F /* CategoryList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

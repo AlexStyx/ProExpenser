@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct CircleView: View {
-    @State var indexOfTappedSlice = -1
     @ObservedObject var chartDataObject: ChartContainer
+    @Binding var indexOfTappedSlice: Int
     @Binding var categoryName: String
     @Binding var percentage: Int
+    
+    var action: ((Int) -> ())?
     
     var body: some View {
         ZStack {
@@ -25,11 +27,11 @@ struct CircleView: View {
                     .scaleEffect(index == indexOfTappedSlice ? 1.1 : 1.0)
                     .animation(.spring())
                     .onTapGesture {
-                        scalePie(at: index)
+                        action?(index)
                     }
             }
         }
-        .frame(width: 200, height: 400)
+        .frame(width: 200, height: 250)
     }
     
     private func scalePie(at index: Int) {
@@ -49,8 +51,10 @@ struct CircleView_Previews: PreviewProvider {
     static var previews: some View {
         CircleView(
             chartDataObject: ChartContainer(period: .day),
+            indexOfTappedSlice: .constant(-1),
             categoryName: .constant("Food"),
-            percentage: .constant(12)
+            percentage: .constant(12),
+            action: nil
         )
     }
 }
