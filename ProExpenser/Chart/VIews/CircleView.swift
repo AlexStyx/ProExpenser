@@ -11,7 +11,7 @@ struct CircleView: View {
     @ObservedObject var chartDataObject: ChartContainer
     @Binding var indexOfTappedSlice: Int
     @Binding var categoryName: String
-    @Binding var percentage: Int
+    @Binding var percentage: Double
     
     var action: ((Int) -> ())?
     
@@ -42,7 +42,7 @@ struct CircleView: View {
         } else {
             indexOfTappedSlice = index
             categoryName = chartDataObject.chartItems[index].name
-            percentage = Int(chartDataObject.chartItems[index].percent.rounded())
+            percentage = Double(chartDataObject.chartItems[index].percent.rounded())
         }
     }
 }

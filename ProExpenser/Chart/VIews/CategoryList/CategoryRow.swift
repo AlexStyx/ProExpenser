@@ -14,8 +14,10 @@ struct CategoryRow: View {
             RoundedRectangle(cornerRadius: 5)
                 .foregroundColor(pieceOfPie.color)
             Text(pieceOfPie.name)
+                .foregroundColor(.black)
             Spacer()
-            Text(Int(pieceOfPie.percent.rounded()) < 1 ? "<1%" : "\(Int(pieceOfPie.percent.rounded()))%")
+            Text(Int(pieceOfPie.percent.rounded()) < 1 ? Int(pieceOfPie.percent.rounded()) == 0 ? "0%" : "<1%" : "\(Int(pieceOfPie.percent.rounded()))%")
+                .foregroundColor(.black)
         }
     }
 }

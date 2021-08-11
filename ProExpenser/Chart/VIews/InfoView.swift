@@ -9,15 +9,21 @@ import SwiftUI
 
 struct InfoView: View {
     @Binding var categoryName: String
-    @Binding var percentage: Int
+    @Binding var percentage: Double
     var body: some View {
         VStack {
-            Text(categoryName)
+            if percentage != 0 {
+                Text(
+                    categoryName
+                )
                 .font(.title)
-            Text(
-                percentage == 0 ? "" : "\(percentage)%"
-            )
+                .foregroundColor(.black)
+                Text(
+                    percentage > 1 ? "\(Int(percentage.rounded()))%" : "<1%"
+                )
                 .font(.subheadline)
+                .foregroundColor(.black)
+            }
         }
     }
 }

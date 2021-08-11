@@ -83,7 +83,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5F0F518326B70E310085EA26 /* Containers */ = {
+		5F0F518326B70E310085EA26 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5F0F518426B70E4F0085EA26 /* SpendCategoryContainer.swift */,
@@ -91,7 +91,7 @@
 				5F63963C26B723F600878BC1 /* ChartContainer.swift */,
 				5F63963E26B7240800878BC1 /* PieceOfPie.swift */,
 			);
-			path = Containers;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5F10439726BD1B4A004690C0 /* VIews */ = {
@@ -145,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				5F10439726BD1B4A004690C0 /* VIews */,
-				5F0F518326B70E310085EA26 /* Containers */,
+				5F0F518326B70E310085EA26 /* Models */,
 			);
 			path = Chart;
 			sourceTree = "<group>";

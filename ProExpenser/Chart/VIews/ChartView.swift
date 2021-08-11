@@ -9,18 +9,20 @@ import SwiftUI
 
 struct ChartView: View {
     @State private var categoryName: String = ""
-    @State private var percentage: Int = 0
+    @State private var percentage: Double = 0
     @State private var indexOfTappedSlice = -1
     @ObservedObject var chartDataObject: ChartContainer
     var body: some View {
         VStack {
             TotalAmountView(chartDataObject: chartDataObject)
                 .padding(.top, 15)
-            ZStack {
-                CircleView(chartDataObject: chartDataObject, indexOfTappedSlice: $indexOfTappedSlice, categoryName: $categoryName, percentage: $percentage, action: scalePie(at:))
-                InfoView(categoryName: $categoryName, percentage: $percentage)
+            if chartDataObject.total > 0 {
+                ZStack {
+                    CircleView(chartDataObject: chartDataObject, indexOfTappedSlice: $indexOfTappedSlice, categoryName: $categoryName, percentage: $percentage, action: scalePie(at:))
+                    InfoView(categoryName: $categoryName, percentage: $percentage)
+                }
+                CategoryList(chartDataObject: chartDataObject, action: scalePie(at:))
             }
-            CategoryList(chartDataObject: chartDataObject, action: scalePie(at:))
         }
     }
     
@@ -32,7 +34,7 @@ struct ChartView: View {
         } else {
             indexOfTappedSlice = index
             categoryName = chartDataObject.chartItems[index].name
-            percentage = Int(chartDataObject.chartItems[index].percent.rounded())
+            percentage = Double(chartDataObject.chartItems[index].percent.rounded())
         }
     }
 }

@@ -22,10 +22,12 @@ class ChartContainer: ObservableObject{
         if let spendCategories = spendCategories {
             let spendCategoryContainers = spendCategories.map { SpendCategoryContainer(spendCategory: $0, period: period)}
             spendCategoryContainers.forEach { totalAmount += $0.total }
-            for container in spendCategoryContainers {
-                let color = Color(colors.remove(at: colors.count.arc4random))
-                let pieceOfPie = PieceOfPie(spendCategoryContainer: container, total: totalAmount, color: color)
-                chartItems.append(pieceOfPie)
+            if totalAmount > 0 {
+                for container in spendCategoryContainers {
+                    let color = Color(colors.remove(at: colors.count.arc4random))
+                    let pieceOfPie = PieceOfPie(spendCategoryContainer: container, total: totalAmount, color: color)
+                    chartItems.append(pieceOfPie)
+                }
             }
         }
         colors = [UIColor.red, .gray, .yellow, .green, .orange, .purple, .blue, .black, #colorLiteral(red: 1, green: 0.410033524, blue: 0.8203747869, alpha: 1), #colorLiteral(red: 0, green: 1, blue: 0.9777814746, alpha: 1), #colorLiteral(red: 0.6234099865, green: 0.3937651515, blue: 1, alpha: 1), #colorLiteral(red: 1, green: 0.7859703898, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 1, blue: 0.7272937298, alpha: 1), #colorLiteral(red: 0.7800317407, green: 0.9913412929, blue: 0.5462956429, alpha: 1)]

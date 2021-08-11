@@ -29,6 +29,7 @@ struct PieChartView: View {
                 ChartView(chartDataObject: ChartContainer(period: period))
             }
         }
+        .background(Color.white)
     }
 }
 
