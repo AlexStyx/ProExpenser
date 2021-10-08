@@ -17,12 +17,10 @@ struct InfoView: View {
                     categoryName
                 )
                 .font(.title)
-                .foregroundColor(.black)
                 Text(
                     percentage > 1 ? "\(Int(percentage.rounded()))%" : "<1%"
                 )
                 .font(.subheadline)
-                .foregroundColor(.black)
             }
         }
     }

@@ -13,7 +13,7 @@ struct CircleView: View {
     @Binding var categoryName: String
     @Binding var percentage: Double
     
-    var action: ((Int) -> ())?
+    var onTapPieceOfPieAction: ((Int) -> ())?
     
     var body: some View {
         ZStack {
@@ -27,7 +27,7 @@ struct CircleView: View {
                     .scaleEffect(index == indexOfTappedSlice ? 1.1 : 1.0)
                     .animation(.spring())
                     .onTapGesture {
-                        action?(index)
+                        onTapPieceOfPieAction?(index)
                     }
             }
         }
@@ -54,7 +54,7 @@ struct CircleView_Previews: PreviewProvider {
             indexOfTappedSlice: .constant(-1),
             categoryName: .constant("Food"),
             percentage: .constant(12),
-            action: nil
+            onTapPieceOfPieAction: nil
         )
     }
 }

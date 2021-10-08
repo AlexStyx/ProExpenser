@@ -18,7 +18,7 @@ struct ChartView: View {
                 .padding(.top, 15)
             if chartDataObject.total > 0 {
                 ZStack {
-                    CircleView(chartDataObject: chartDataObject, indexOfTappedSlice: $indexOfTappedSlice, categoryName: $categoryName, percentage: $percentage, action: scalePie(at:))
+                    CircleView(chartDataObject: chartDataObject, indexOfTappedSlice: $indexOfTappedSlice, categoryName: $categoryName, percentage: $percentage, onTapPieceOfPieAction: scalePie(at:))
                     InfoView(categoryName: $categoryName, percentage: $percentage)
                 }
                 CategoryList(chartDataObject: chartDataObject, action: scalePie(at:))

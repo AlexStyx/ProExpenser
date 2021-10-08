@@ -9,9 +9,9 @@ import Foundation
 
 final class TransactionsContainer {
     
-    private var dayRange: ClosedRange<Date> = (Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date())...Date()
-    private var monthRange: ClosedRange<Date> = (Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date())...Date()
-    private var yearRange: ClosedRange<Date> = (Calendar.current.date(byAdding: .year, value: -1, to: Date()) ?? Date())...Date()
+    private var dayRange: ClosedRange<Date> = Date()...Date()
+    private var monthRange: ClosedRange<Date> = Date()...Date()
+    private var yearRange: ClosedRange<Date> = Date()...Date()
     
     var todayTransactions = [Transaction]()
     var monthTransactions = [Transaction]()
@@ -25,7 +25,7 @@ final class TransactionsContainer {
             let hour = components.hour,
             let day = components.day,
             let month = components.month,
-            let startDay = Calendar.current.date(byAdding: .second, value: -seconds, to: date.addingTimeInterval(TimeInterval(10800))),
+            let startDay = Calendar.current.date(byAdding: .second, value: -seconds, to: date),
             let startDay = Calendar.current.date(byAdding: .minute, value: -minute, to: startDay),
             let startDay = Calendar.current.date(byAdding: .hour, value: -hour, to: startDay),
             let startMonth = Calendar.current.date(byAdding: .day, value: -day + 1, to: startDay),

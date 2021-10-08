@@ -20,7 +20,7 @@ class EnterRouter: EnterRouterProtocol {
     }
     
     func goToChart() {
-        let pieChart = PieChartView()
+        let pieChart = PieChartView().colorScheme(.light)
         let rootViewController = UIHostingController(rootView: pieChart)
         viewController.present(rootViewController, animated: true)
     }
